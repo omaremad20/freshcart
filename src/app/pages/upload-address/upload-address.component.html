@@ -1,0 +1,88 @@
+<section class="dark:bg-slate-950 bg-slate-50 flex justify-center">
+  <div class="w-[90%] mx-auto bg-slate-100 dark:bg-slate-900 py-3 my-5 rounded-xl shadow">
+    <div class="w-[95%]  ms-auto">
+      <h2 class="registerTxt text-[#15f315] dark:text-[#0affff]">Add Address </h2>
+    </div>
+    <form class="" [formGroup]="addressForm" (ngSubmit)="upload()">
+      <div class=" mx-auto box-border flex flex-col py-[1rem] ">
+        <label for="name" class=" w-[85%] mx-auto mb-2 dark:text-white text-black">Name</label>
+        <input formControlName = "name" id="name" type="text" placeholder="NickName Address..." class="w-[85%] rounded-xl mx-auto shareLinkInput dark:bg-black bg-white dark:text-white text-black" autocomplete="off"/>
+        @if (addressForm.get('name')?.errors && addressForm.get('name')?.touched) {
+          <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] mx-auto" role="alert">
+            <div>
+                <ul class="mt-1.5 list-disc  list-inside">
+                  @if (addressForm.get('name')?.getError('required')) {
+                    <li class="ico-tra"><i class="fa-solid fa-circle-exclamation mx-1  text-capitalize"></i>Required</li>
+                  }@else if (addressForm.get('name')?.getError('maxlength')) {
+                    <li class="ico-tra"><i class="fa-solid fa-circle-exclamation mx-1  text-capitalize"></i>32 Char As Long</li>
+                  }@else if (addressForm.get('name')?.getError('minlength')) {
+                    <li class="ico-tra"><i class="fa-solid fa-circle-exclamation mx-1  text-capitalize"></i>3 Char As Short</li>
+                  }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+      <div class=" mx-auto box-border flex flex-col py-[1rem]">
+        <label for="details" class="w-[85%] mx-auto mb-2 dark:text-white text-black">Details</label>
+        <input formControlName = "details" id="details" type="text" placeholder="Details..." class="w-[85%] rounded-xl mx-auto shareLinkInput dark:bg-black bg-white dark:text-white text-black" autocomplete="off"/>
+        @if (addressForm.get('details')?.errors && addressForm.get('details')?.touched) {
+          <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] mx-auto" role="alert">
+            <div>
+                <ul class="mt-1.5 list-disc  list-inside">
+                  @if (addressForm.get('details')?.getError('required')) {
+                    <li class=""><i class="fa-solid fa-circle-exclamation text-capitalize mx-1"></i>Required</li>
+                  }@else if (addressForm.get('details')?.getError('maxlength')) {
+                    <li class=""><i class="fa-solid fa-circle-exclamation text-capitalize mx-1"></i>255 Char As Long</li>
+                  }@else if (addressForm.get('details')?.getError('minlength')) {
+                    <li class="ico-tra"><i class="fa-solid fa-circle-exclamation mx-1  text-capitalize"></i>3 Char As Short</li>
+                  }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+      <div class=" mx-auto box-border flex flex-col py-[1rem]">
+        <label for="city" class="w-[85%] mx-auto mb-2 dark:text-white text-black">City</label>
+        <input formControlName = "city" id="city" type="text" placeholder="City..." class="w-[85%] rounded-xl mx-auto shareLinkInput dark:bg-black bg-white dark:text-white text-black" autocomplete="off"/>
+        @if (addressForm.get('city')?.errors && addressForm.get('city')?.touched) {
+          <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] mx-auto" role="alert">
+            <div>
+                <ul class="mt-1.5 list-disc  list-inside">
+                  @if (addressForm.get('city')?.getError('required')) {
+                    <li class=""><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Required</li>
+                  }@else if (addressForm.get('city')?.getError('maxlength')) {
+                    <li class=""><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>32 Char As Long</li>
+                  }@else if (addressForm.get('city')?.getError('minlength')) {
+                    <li class="ico-tra"><i class="fa-solid fa-circle-exclamation mx-1  text-capitalize"></i>3 Char As Short</li>
+                  }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+      <div class=" mx-auto box-border flex flex-col py-[1rem]">
+        <label for="phone" class="w-[85%] mx-auto mb-2 dark:text-white text-black">Phone</label>
+        <input formControlName = "phone" id="phone" type="tel" placeholder="Your Phone..." class="w-[85%] rounded-xl mx-auto shareLinkInput dark:bg-black bg-white dark:text-white text-black" autocomplete="off"/>
+        @if (addressForm.get('phone')?.errors && addressForm.get('phone')?.touched) {
+          <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] mx-auto" role="alert">
+            <div>
+                <ul class="mt-1.5 list-disc list-inside">
+                  @if (addressForm.get('phone')?.getError('pattern')) {
+                    <li class=""><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Invaild Egyptian Phone</li>
+                  }@else if (addressForm.get('phone')?.getError('required')) {
+                    <li><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Required</li>
+                  }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+      <div class="flex justify-center">
+          <button class="bg-[#0aad0ad4] rounded-xl py-2 ms-2 text-white px-3 hover:bg-[#0aad0a] shadow transition-all duration-300 ease-in-out">
+            Add Address
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

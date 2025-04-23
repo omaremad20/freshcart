@@ -1,0 +1,33 @@
+.bg-green-border {
+  border-color: #0aad0a !important;
+}
+.green-text {
+  color: #0aad0a !important;
+}
+.fa-minus , .fa-plus {
+  font-size: 0.55rem;
+}
+.empty {
+  min-height: 80vh;
+  margin-block: 1.5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.subtotal {
+  letter-spacing: 2px;
+}
+.btn {
+  border: solid 2px #0aad0a;
+  border-radius: 50rem;
+  padding-inline: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pipe {
+  border: 1px solid rgb(114, 113, 113);
+  width: 1px;
+  height: 1.5rem;
+}

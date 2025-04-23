@@ -1,0 +1,117 @@
+<section class="bg-slate-50 dark:bg-slate-950 flex justify-center items-center">
+  <div class="w-[90%] mx-auto bg-slate-100 dark:bg-slate-900 rounded-md pt-5 my-5 shadow-md">
+    <div class="w-[95%] ms-auto">
+      <h2 class="infoTxt text-[#15f315] dark:text-[#0affff]"> Your Information : </h2>
+    </div>
+  <form [formGroup]="checkOutForm" (ngSubmit)="checkOut()">
+    <div class=" mx-auto box-border flex flex-col py-[1rem]">
+      <input class="w-[85%] rounded-xl mx-auto shareLinkInput dark:bg-black bg-white dark:text-white text-black" type="text" formControlName = "details" placeholder="Address..." autocomplete="off"/>
+      @if (checkOutForm.get('details')?.errors && checkOutForm.get('details')?.touched) {
+        <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] mx-auto" role="alert">
+          <div>
+              <ul class="mt-1.5 list-disc list-inside">
+                  @if (checkOutForm.get('details')?.getError('required')) {
+                  <li class="font-black"><i class="fa-solid fa-circle-exclamation mx-1"></i>Required</li>
+                }@else if (checkOutForm.get('details')?.getError('minlength')) {
+                  <li class="font-black"><i class="fa-solid fa-circle-exclamation mx-1"></i>3 Char As Short</li>
+                }@else if (checkOutForm.get('details')?.getError('maxlength')) {
+                  <li class="font-black"><i class="fa-solid fa-circle-exclamation mx-1"></i>255 Char As Short</li>
+                }
+            </ul>
+          </div>
+        </div>
+      }
+    </div>
+    <div class=" mx-auto box-border flex flex-col py-[1rem]">
+      <input class="w-[85%] rounded-xl mx-auto shareLinkInput dark:bg-black bg-white dark:text-white text-black" type="tel" formControlName = "phone" placeholder="Phone..." autocomplete="off"/>
+        @if (checkOutForm.get('phone')?.errors && checkOutForm.get('phone')?.touched) {
+          <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] mx-auto" role="alert">
+            <div>
+              <ul class="mt-1.5 list-disc  list-inside">
+                @if (checkOutForm.get('phone')?.getError('required')) {
+                  <li class="font-black"><i class="fa-solid fa-circle-exclamation mx-1"></i>Required</li>
+                }@else if (checkOutForm.get('phone')?.getError('pattern')) {
+                  <li class="font-black"><i class="fa-solid fa-circle-exclamation mx-1"></i>Invaild Egyptian Phone </li>
+                }
+              </ul>
+            </div>
+            </div>
+      }
+    </div>
+    <div class="mx-auto box-border W-[85%] flex flex-col py-[1rem]">
+      <input name="city" placeholder="City..." type="text" id="city" formControlName="city" class="w-[85%] rounded-xl mx-auto shareLinkInput dark:bg-black bg-white dark:text-white text-black">
+        @if (checkOutForm.get('city')?.errors && checkOutForm.get('city')?.touched) {
+          <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] mx-auto" role="alert">
+            <div>
+              <ul class="mt-1.5 list-disc  list-inside">
+            @if (checkOutForm.get('city')?.getError('required')) {
+              <li class="font-black"><i class="fa-solid fa-circle-exclamation mx-1"></i>Required</li>
+            }@else if (checkOutForm.get('city')?.getError('minlength')) {
+              <li class="font-black"><i class="fa-solid fa-circle-exclamation mx-1"></i>3 Char As Short</li>
+            }@else if (checkOutForm.get('city')?.getError('maxlength')) {
+              <li class="font-black"><i class="fa-solid fa-circle-exclamation mx-1"></i>32 Char As Long</li>
+            }
+            </ul>
+            </div>
+            </div>
+        }
+    </div>
+    <div class="mx-auto w-[85%] box-border flex flex-col py-[1rem] dark:text-white text-black">
+      <label class=" font-semibold">Payment Method</label>
+      @if (checkOutForm.get('payment')?.errors && checkOutForm.get('payment')?.touched) {
+        <div class=" px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] " role="alert">
+          <div>
+            <ul class="my-1.5 list-disc  list-inside">
+        @if (checkOutForm.get('payment')?.getError('required')) {
+          <li class="font-black "><i class="fa-solid fa-circle-exclamation mx-1"></i>Required</li>
+        }
+      </ul>
+      </div>
+      </div>
+      }
+      <label class="mb-1 font-black">
+        <input type="radio" class name="payment" formControlName="payment" value="visa" class="text-[#0AAD0A] rounded-xl mx-1 shareLinkInput ">
+        Visa
+      </label>
+      <label class=" font-black">
+        <input type="radio" name="payment" formControlName="payment" value="cash" class="text-[#0AAD0A]  rounded-xl mx-1 shareLinkInput">
+        Cash On Delivery
+      </label>
+    </div>
+    <div class="flex justify-center">
+      <button class=" bg-[#0aad0ad4] text-white mb-3 rounded-xl py-2 ms-2  px-3 hover:bg-[#0aad0a] shadow-lg transition-all duration-300 ease-in-out">Check Out <i class="fas fa-receipt"></i> </button>
+    </div>
+    @if (all !== 0) {
+      <p class="dark:text-white font-black text-black flex pt-2 pb-3 justify-end w-fit mx-auto mb-0 cursor-pointer" (click)="chooseCliked()">Choose From Addresses ?</p>
+    }
+  </form>
+        @if (btnClicked === true) {
+            <section class="bg-slate-50 dark:bg-slate-950  flex items-center justify-start flex-col">
+            <div class=" w-full  mx-auto  mt-3 bg-slate-50 dark:bg-slate-950 animeError  shadow-md   ">
+              <div class="row w-[100%] md:w-[85%]  mx-auto">
+                @for (address of data; track address._id) {
+                  <div class="col-12 ">
+                    <div class="inner bg-slate-200 dark:bg-slate-900 p-3 rounded-lg flex flex-col flex-lg-row justify-between">
+                      <div class="dark:text-white text-black">
+                        <p class="font-black  text-2xl">{{address.name}}</p>
+                        <ul class="ms-4 my-2">
+                          <li class="">
+                            <span class="font-semibold "> Details : </span>
+                            <span class="">{{address.details}}</span></li>
+                            <li> <span class="font-semibold"> Phone : </span> {{address.phone}}</li>
+                          <li> <span class="font-semibold"> City : </span>  {{address.city}}</li>
+                        </ul>
+                      </div>
+                      <div class="flex justify-center items-center">
+                        <button class="bg-[#0aad0ad4] mt-4 rounded-xl py-2 ms-2 text-white px-3 hover:bg-[#0aad0a] shadow transition-all duration-300 ease-in-out dark:bg-[#0a8d0a] dark:hover:bg-[#0a9c0a] dark:text-white" (click)="selectAddress(address._id)"> Select </button>
+                      </div>
+                    </div>
+                    <div class="w-full h-[1px] dark:bg-slate-400 bg-slate-800"></div>
+                </div>
+                }
+              </div>
+            </div>
+          </section>
+        }
+</div>
+</section>

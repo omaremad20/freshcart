@@ -1,0 +1,89 @@
+@if (productsData) {
+  @if (!productsData.length) {
+    <section class="min-h-[100vh] flex justify-center items-center bg-slate-50 dark:bg-slate-950">
+      <div class="w-[90%] empty mx-auto p-2  ">
+        <h2 class=" mb-2 dark:text-white text-black">Your Cart Is Empty For Now... </h2>
+        <p class="cursor-pointer text-[#0aad0a] font-bold" routerLink="/Products">Add Products To <i class="fa-solid fa-cart-shopping"></i></p>
+      </div>
+    </section>
+  }@else{
+    <section class="min-h-[100vh] flex justify-center items-start bg-slate-50 dark:bg-slate-950">
+      <div class="w-[90%] my-5 p-2 mx-auto shadow-md rounded-lg bg-slate-200 dark:bg-slate-900">
+        <h1 class="text-3xl mt-3 mb-2 font-black dark:text-white text-black">Shop Cart  </h1>
+        <p class="green-text">Total Cart Price :
+          @if (productsData.length > 0) {
+            @if (totalCartPice !== null && totalCartPice !== undefined) {
+              {{totalCartPice  | currency:'GBP'}} EGP
+            }
+          }@else {
+            0 EGP
+          }
+        </p>
+        <div class="row p-3">
+          <div class="col-12 ">
+            @for (product of productsData; track product.product._id) {
+              <div class="row">
+                <div class="col-4 col-md-2 col-lg-1 ">
+                  <div class="parentImage">
+                    <img [src]="product.product.imageCover" [alt]="product.product.title" class="w-full block rounded-md">
+                  </div>
+                </div>
+                <div class="col-8 col-lg-10 flex items-center">
+                  <div class="imageAndDetails flex">
+                    <div class="parentDetails flex flex-col justify-center px-3">
+                      <p class="productTitle mb-1 dark:text-white text-black">{{product.product.title}}</p>
+                      <p class="mb-1 dark:text-white text-black">Brand : <span>{{product.product.brand.slug}}</span> </p>
+                      <p class="mb-1 dark:text-white text-black ">Price : <span>{{product.price | currency:'GBP'}} EGP</span></p>
+                      <p class="mb-1 dark:text-white text-black">Rate : <span>{{product.product.ratingsAverage}}</span><i class="fa-solid fa-star mx-1 rating-color"></i> </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-2 col-lg-1 flex dark:text-white text-black mt-2 mt-md-0">
+                  <div class="parentButtons flex w-full justify-evenly  items-center">
+                    <button (click)="updateItemQun(product.product._id , {'count' : product.count = product.count + 1 })" class="flex justify-center items-center border bg-green-border p-[0.75rem] rounded-md mx-1" title="Add One Of This">
+                      <i class="fa-solid  fa-plus"></i>
+                    </button>
+                    <p class="mx-1">{{product.count}}</p>
+                    @if (product.count === 1) {
+                      <button disabled  class="border flex justify-center cursor-pointer items-center bg-green-border p-[0.75rem] rounded-md mx-1" title="Remove One Of This">
+                        <i class="fa-solid fa-minus"></i>
+                      </button>
+                    }@else if (product.count > 1) {
+                      <button (click)="updateItemQun(product.product._id , {'count' : product.count = product.count - 1 })" class="border flex justify-center items-center bg-green-border p-[0.75rem] rounded-md mx-1" title="Remove One Of This">
+                        <i class="fa-solid fa-minus"></i>
+                      </button>
+                    }
+                  </div>
+                </div>
+                <div class="col-12 col-md-2 col-lg-1 w-full flex  justify-center  mt-2">
+                  <button class="btn py-1" title="Click To Remove" (click)="deleteProductFromCart(product.product._id)">
+                    <p class="remove text-sm"> <i class="fa-solid green-text fa-trash-can"></i> <span class="text-black dark:text-white ms-2">Remove</span></p>
+                  </button>
+                  <span class="pipe  mx-2"></span>
+                  <button class="btn" title="Click To Save Later" (click)="Addproducttowishlist(product.product._id)">
+                    <p class="remove text-sm"> <i class="fa-solid fa-bookmark green-text"></i> <span class="text-black dark:text-white ms-2">Save For Later</span>  </p>
+                  </button>
+                </div>
+                <div class="w-full h-[0.25px] mt-4 mb-2  bg-slate-300"></div>
+              </div>
+            }
+          </div>
+        </div>
+        <div class="flex flex-col flex-lg-row mx-auto justify-between">
+          <div class="mx-2">
+            <p class="font-black subtotal dark:text-white text-black">Subtotal :({{totalCartPice | currency:'GBP'}} EGP)</p>
+          </div>
+          <div class="flex justify-between my-2 my-lg-0">
+            @if(productsData.length >0) {
+              <button class="bg-red-700 dark:bg-red-900 rounded-md px-2 py-1.5 mx-2 mb-1" (click)="deleteAll()"> <span class="text-white text-capitalize mx-2" >Delete Cart</span> <i class="fa-solid  fa-trash-can text-white"></i></button>
+              <button class=" rounded-md px-2 py-1.5 mx-2 mb-1 bg-[#0aad0ad4]  text-white hover:bg-[#0aad0a] shadow transition-all duration-300 ease-in-out dark:bg-[#0a8d0a] dark:hover:bg-[#0a9c0a] dark:text-white"><span class="text-white text-capitalize mx-2" [routerLink]="['/CheckOut' , cartId , cartOwner ]" (click)="goToCheckOut()">Check Out</span><i class="fa-solid fa-cart-shopping text-white"></i></button>
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+  }
+}
+@if (loading === true) {
+  <section class="min-h-[100vh] flex  bg-slate-50 dark:bg-slate-950"></section>
+}

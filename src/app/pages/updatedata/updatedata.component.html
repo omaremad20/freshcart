@@ -1,0 +1,75 @@
+ <section class="min-h-[100vh] flex justify-center items-center bg-slate-50 dark:bg-slate-950">
+  <div class="w-[90%] mx-auto py-3 bg-slate-100 dark:bg-slate-900  rounded-xl shadow">
+    <div class="w-[95%]  ms-auto">
+      <h2 class="registerTxt text-[#15f315] dark:text-[#0affff]">Edit Data</h2>
+    </div>
+    <form class="" [formGroup]="updateForm" (ngSubmit)="updateData()">
+      <div class=" mx-auto box-border flex flex-col py-[1rem] ">
+        <label for="name" class=" w-[85%] mx-auto mb-2 dark:text-white text-black">Name</label>
+        <input formControlName = "name" id="name" type="text" placeholder="Your Name..." class="w-[85%] rounded-xl mx-auto shareLinkInput dark:bg-black bg-white dark:text-white text-black" autocomplete="off"/>
+        @if (updateForm.get('name')?.errors && updateForm.get('name')?.touched) {
+          <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] mx-auto" role="alert">
+            <div>
+                <ul class="mt-1.5 list-disc  list-inside">
+                  @if (updateForm.get('name')?.getError('minlength')) {
+                    <li class="ico-tra"><i class="fa-solid fa-circle-exclamation mx-1  text-capitalize"></i>2 Char As Short</li>
+                  }@else if (updateForm.get('name')?.getError('maxlength')) {
+                    <li><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>16 Char As Long</li>
+                  }@else if (updateForm.get('name')?.getError('required')) {
+                    <li><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Required</li>
+                  }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+      <div class=" mx-auto box-border flex flex-col py-[1rem]">
+        <label for="email" class="w-[85%] mx-auto mb-2 dark:text-white text-black">Email</label>
+        <input formControlName = "email" id="email" type="email" placeholder="Your Email..." class="w-[85%] rounded-xl mx-auto shareLinkInput dark:bg-black bg-white dark:text-white text-black" [value]="userEmail" autocomplete="off"/>
+        @if (updateForm.get('email')?.errors && updateForm.get('email')?.touched) {
+          <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] mx-auto" role="alert">
+            <div>
+                <ul class="mt-1.5 list-disc  list-inside">
+                  @if (updateForm.get('email')?.getError('email')) {
+                    <li class=""><i class="fa-solid fa-circle-exclamation text-capitalize mx-1"></i>Invaild Email</li>
+                  }@else if (updateForm.get('email')?.getError('required')) {
+                    <li><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Required</li>
+                  }@else if (updateForm.get('email')?.getError('minlength')) {
+                    <li><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Invaild Email</li>
+                  }@else if (updateForm.get('email')?.getError('maxlength')) {
+                    <li><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Invaild Email</li>
+                  }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+      <div class=" mx-auto box-border flex flex-col py-[1rem]">
+        <label for="phone" class="w-[85%] mx-auto mb-2 dark:text-white text-black">Phone</label>
+        <input formControlName = "phone" id="phone" type="tel" placeholder="Your Phone..." class="w-[85%] rounded-xl mx-auto shareLinkInput dark:bg-black bg-white dark:text-white text-black" autocomplete="off"/>
+        @if (updateForm.get('phone')?.errors && updateForm.get('phone')?.touched) {
+          <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] mx-auto" role="alert">
+            <div>
+                <ul class="mt-1.5 list-disc list-inside">
+                  @if (updateForm.get('phone')?.getError('pattern')) {
+                    <li class=""><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Invaild Egyptian Phone</li>
+                  }@else if (updateForm.get('phone')?.getError('required')) {
+                    <li><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Required </li>
+                  }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+      <div class="flex justify-center">
+          <button class=" bg-[#0aad0ad4] rounded-xl py-2 ms-2 text-white px-3 hover:bg-[#0aad0a] shadow transition-all duration-300 ease-in-out">Update</button>
+        </div>
+        @if(exist === true) {
+          <p class="text-center animeError text-red-800 dark:text-red-300 font-black mt-2"><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Exist</p>
+        }
+        @if (showErrorMessage === true) {
+          <p class="text-center animeError text-red-800 dark:text-red-300 font-black mt-2"><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i> Must Change Email</p>
+        }
+    </form>
+  </div>
+</section>

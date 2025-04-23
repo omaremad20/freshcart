@@ -1,0 +1,79 @@
+@if(orders) {
+  @if (!orders.length) {
+    <section class="flex bg-slate-50 dark:bg-slate-950 justify-center items-center min-h-[100vh]">
+      <div class="flex flex-col justify-center items-center">
+        <h1 class="dark:text-white text-black">No Orders For Now</h1>
+        <a routerLink="/Products" class="cursor-pointer text-[#0aad0a] font-bold">Make Order</a>
+      </div>
+    </section>
+  }@else {
+  <section class="min-h-[100vh] py-3 flex justify-center items-center bg-slate-50 dark:bg-slate-950 flex-col">
+    <h1 class="text-3xl mb-4 font-black text-center dark:text-white text-black pt-5">Your <span class="anmieWordLeft"> Orders</span> </h1>
+      <div class="w-[90%] p-2 mx-auto shadow-md rounded-lg bg-slate-200 dark:bg-slate-900">
+        <div class="row p-3">
+          <div class="col-12">
+            @for(order of orders ; track order._id) {
+              @for(image of order.cartItems ; track image.product._id) {
+                  <div class="row py-2">
+                    <div class="col-4 col-md-2 col-lg-1">
+                      <div class="parentimage">
+                        <img [src]="image.product.imageCover" class="" alt="">
+                      </div>
+                    </div>
+                      <div class="col-8 col-lg-10 flex items-center">
+                        <div class="imageAndDetails flex">
+                          <div class="parentDetails dark:text-white text-black flex flex-col justify-center px-3">
+                            <p class="productTitle mb-1">Title : {{image.product.title}}</p>
+                            <p class="mb-1">Brand : <span>{{image.product.brand.slug}}</span> </p>
+                            <p class="mb-1 green-text">Price : <span>{{image.price}}</span></p>
+                            <p class="mb-1">Peaces : <span>{{image.count}}</span></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                  <div class="row">
+                    <div class="col-12 ">
+                      <p class="font-black text-xl my-3 dark:text-white text-black">Details</p>
+                      <div class="inner relative flex justify-between p-3 rounded-md shadow-lg mb-2 bg-slate-300 dark:bg-slate-950">
+                        <div>
+                          <ul class="ms-3 mt-4 dark:text-white text-black">
+                            <li class="my-1"><span class="font-bold">Payment Method : </span>{{order.paymentMethodType}} </li>
+                            @if (order.isDelivered === false) {
+                              <li class="my-1"><span class="font-bold">Status : </span> Pending</li>
+                            }@else {
+                              <li class="my-1"><span class="font-bold">Status : </span> Deliverd</li>
+                            }
+                            <li class="my-1"> <span class="font-bold">Details : </span>{{order.shippingAddress.details}}  </li>
+                            <li class="my-1"> <span class="font-bold">City : </span>{{order.shippingAddress.city}}  </li>
+                            <li class="my-1"> <span class="font-bold">Phone </span>{{order.shippingAddress.phone}} </li>
+
+                            <li class="my-1"> <span class="font-bold">Shipping Price : </span>{{order.shippingPrice}} EGP </li>
+                            <li class="my-1"> <span class="font-bold">Taxes : </span>{{order.taxPrice}} EGP </li>
+                            <li class="my-1"> <span class="font-bold">Total Order Price : </span>{{order.totalOrderPrice}} EGP</li>
+                          </ul>
+                        </div>
+                        @if (order.isPaid === true) {
+                          <div class="bg-[#0AAD0A] px-3 py-1 h-fit right-0 top-0 rounded-md absolute">
+                            <p class="text-white">paid <i class="fa-solid fa-circle-check"></i></p>
+                          </div>
+                        }@else if (order.isPaid === false) {
+                          <div class="bg-red-700 px-3 py-1 h-fit right-0 top-0 rounded-md absolute">
+                            <p class="text-white">Not Paid <i class="fa-solid fa-circle-xmark"></i></p>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                  <div class="w-full h-[3px] my-2 bg-slate-300"></div>
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+}
+}
+@if (loading === true) {
+  <section class="min-h-[100vh] flex justify-center items-center bg-slate-50 dark:bg-slate-950"></section>
+
+}

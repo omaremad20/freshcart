@@ -1,0 +1,57 @@
+<section class="bg-slate-50 dark:bg-slate-950">
+  <div class=" main w-[95%] py-5 mx-auto">
+    <h1 class="text-center text-3xl font-black text-black dark:text-white">Welcome <span class="anmieWord">{{userName}}</span> </h1>
+    <div class="row w-[95%] mx-auto ">
+      <div class="col-12">
+        <a routerLink="/Addresses">
+          <div class="inner cursor-pointer bg-slate-200 dark:bg-slate-900 relative shadow-md rounded-md p-3 my-3">
+            <p class="font-black text-2xl text-black dark:text-white">Addresses</p>
+            <span class="dot rounded-circle shadow-md">{{countAddresses}}</span>
+          </div>
+        </a>
+      </div>
+      <div class="col-12">
+        <a routerLink="/Cart">
+          <div class="inner cursor-pointer bg-slate-200 relative dark:bg-slate-900 shadow-md rounded-md p-3 my-3">
+            <p class="font-black text-2xl text-black dark:text-white">Cart</p>
+            <span class="dot rounded-circle shadow-md">{{countCart}}</span>
+
+          </div>
+        </a>
+      </div>
+      <div class="col-12">
+        <a routerLink="/allorders">
+          <div class="inner cursor-pointer bg-slate-200 dark:bg-slate-900 relative shadow-md rounded-md p-3 my-3">
+            <p class="font-black text-2xl text-black dark:text-white">Orders</p>
+            <span class="dot rounded-circle shadow-md">{{countOrders}}</span>
+          </div>
+        </a>
+      </div>
+      <div class="col-12">
+        <a routerLink="/wishlist">
+          <div class="inner cursor-pointer bg-slate-200 dark:bg-slate-900 shadow-md rounded-md p-3 my-3 relative">
+            <p class="font-black text-2xl text-black dark:text-white">Wish List</p>
+            <span class="dot rounded-circle shadow-md">{{countWish}}</span>
+          </div>
+        </a>
+      </div>
+      <div class="col-12">
+        <div class="inner cursor-pointer bg-slate-200 dark:bg-slate-900 shadow-md rounded-md p-3 my-3">
+          <p class="font-black text-2xl text-black dark:text-white" routerLink="/UpdateLoggeduserpassword">Reset Password</p>
+        </div>
+      </div>
+      <div class="col-12">
+        <a routerLink="/updateinfo">
+          <div class="inner cursor-pointer bg-slate-200 dark:bg-slate-900 shadow-md rounded-md p-3 my-3">
+            <p class="font-black text-2xl text-black dark:text-white">Update Information</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-12">
+        <div class="inner cursor-pointer bg-slate-200 dark:bg-slate-900 shadow-md rounded-md p-3 mt-3" (click)="logout()">
+          <p class="font-black text-2xl text-black dark:text-white">Logout <i class="fa-solid fa-right-from-bracket mx-2"></i></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

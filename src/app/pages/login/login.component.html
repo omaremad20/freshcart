@@ -1,0 +1,77 @@
+<section class="min-h-[100vh] flex items-center bg-slate-50 dark:bg-slate-950">
+  <div class="w-[90%] mx-auto bg-slate-100 py-5 rounded-xl shadow dark:bg-slate-900">
+    <div class="w-[95%]  ms-auto">
+      <h2 class="registerTxt text-[#15f315] dark:text-[#0affff]">Login : </h2>
+    </div>
+    <form class="" [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class=" mx-auto box-border flex flex-col py-[1rem]">
+        <label for="email" class="w-[85%] mx-auto mb-2 text-black dark:text-white">Email</label>
+        <input formControlName = "email" type="email" placeholder="Your Email..." class="w-[85%]  rounded-xl mx-auto shareLinkInput bg-white dark:bg-black text-black dark:text-white" autocomplete="off">
+              @if (loginForm.get('email')?.errors && loginForm.get('email')?.touched) {
+              <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] mx-auto" role="alert">
+                <div>
+                    <ul class="mt-1.5 list-disc  list-inside">
+                      @if (loginForm.get('email')?.getError('email')) {
+                        <li class=""><i class="fa-solid fa-circle-exclamation mx-1"></i>Invaild Email</li>
+                      }@else if (loginForm.get('email')?.getError('required')) {
+                        <li><i class="fa-solid fa-circle-exclamation mx-1"></i>Required</li>
+                      }@else if (loginForm.get('email')?.getError('maxlength')) {
+                        <li><i class="fa-solid fa-circle-exclamation mx-1"></i>Invaild Email</li>
+                      }@else if (loginForm.get('email')?.getError('minlength')) {
+                        <li><i class="fa-solid fa-circle-exclamation mx-1"></i>Invaild Email</li>
+                      }
+                  </ul>
+                </div>
+              </div>
+            }
+      </div>
+      <div class=" mx-auto box-border flex flex-col pt-[1rem]">
+        <label for="password" class="w-[85%] mx-auto mb-2 text-black dark:text-white">Password</label>
+        <div class="flex justify-center items-center relative mx-auto w-[85%]">
+          <input formControlName = "password" [type]="passwordVisable ? 'text' : 'password'" placeholder="Your Password..." class="w-[100%] bg-white dark:bg-black text-black dark:text-white rounded-xl mx-auto shareLinkInput" autocomplete="off"/>
+          <div class="absolute right-3 cursor-pointer px-1" (click)="showPassword()" >
+            <i
+              class="fa-solid dark:text-white text-black"
+              [class.fa-eye]="passwordVisable"
+              [class.fa-eye-slash]="!passwordVisable"
+            ></i>
+          </div>
+        </div>
+      </div>
+      @if (loginForm.get('password')?.errors && loginForm.get('password')?.touched) {
+        <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] mx-auto" role="alert">
+          <div>
+              <ul class="mt-1.5 list-disc  list-inside">
+                @if (loginForm.get('password')?.getError('pattern')) {
+                  <li class=""><i class="fa-solid fa-circle-exclamation mx-1"></i>Invaild Password</li>
+                }@else if (loginForm.get('password')?.getError('required')) {
+                  <li><i class="fa-solid fa-circle-exclamation mx-1"></i>Required</li>
+                }
+            </ul>
+          </div>
+        </div>
+      }
+      <div class="flex justify-center">
+        @if (isLoading === false) {
+          <button
+            class=" bg-[#0aad0ad4] mt-4 rounded-xl py-2 ms-2 text-white px-3 hover:bg-[#0aad0a] shadow transition-all duration-300 ease-in-out dark:bg-[#0a8d0a] dark:hover:bg-[#0a9c0a] dark:text-white">
+            Login
+            <i class="fa-solid fa-right-to-bracket"></i>
+          </button>
+        }
+        @else if(isLoading === true) {
+          <button
+            class=" bg-[#0aad0ad4] mt-4 rounded-xl py-2 ms-2 text-white px-3 hover:bg-[#0aad0a] shadow transition-all duration-300 ease-in-out dark:bg-[#0a8d0a] dark:hover:bg-[#0a9c0a] dark:text-white"
+            disabled>
+            Login
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+          </button>
+        }
+      </div>
+    </form>
+    <button class="mx-auto pt-3 w-fit flex justify-center  p-1 text-sm font-black cursor-pointer text-black dark:text-white" routerLink="/ForgettenPassword">Forget Password</button>
+    <div class="pt-3 text-center text-sm text-red-900 dark:text-red-400 rounded-lg">
+      <span class="font-medium "> {{incorrecDataMessage}} </span>
+    </div>
+  </div>
+</section>

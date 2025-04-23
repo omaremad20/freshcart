@@ -1,0 +1,53 @@
+<section class="bg-slate-50 dark:bg-slate-950 pt-4 items-center justify-center">
+  <div class="container flex  items-center main w-[95%] mx-auto justify-center">
+  <div class="row flex w-full">
+    <div class="col-12 col-lg-6">
+      <div class="inner pb-3">
+        <h1 class="text-6xl font-black mb-2 text-black dark:text-white">Fresh Cart</h1>
+        <h2 class="text-2xl mt-2 w-[95%] text-black dark:text-white">Fresh Cart Helps You To Reset Your Password.</h2>
+        <div class="py-1 text-black dark:text-white">
+          <p class="py-1">Steps</p>
+          <ul>
+            <li class="py-1 font-black text-xs">1 - Type Your Email You Register with It Before.</li>
+            <li class="py-1 text-xs">2 - Check Your Email && Verfiy Code.</li>
+            <li class="py-1 text-xs">3 - Type Your Email && New Password.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6">
+      <div class="inner bg-slate-200 dark:bg-slate-900 py-3 rounded-md">
+        <form [formGroup]="emailForm" (ngSubmit)="sendCode()">
+          <div class=" mx-auto box-border flex flex-col py-[1rem]">
+            <label for="email" class="w-[95%] mx-auto text-black dark:text-white mb-2">Please Enter Your Email Here To Send Verification Code</label>
+            <input formControlName = "email" type="email" placeholder="Your Email..." class="w-[95%] mb-2 rounded-xl mx-auto shareLinkInput dark:bg-black dark:text-white text-black bg-white" autocomplete="off">
+            @if (emailForm.get('email')?.errors && emailForm.get('email')?.touched) {
+              <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[95%] mx-auto" role="alert">
+                <div>
+                  <ul class="list-disc  list-inside">
+              @if (emailForm.get('email')?.getError('email')) {
+                <li class=""><i class="fa-solid fa-circle-exclamation mx-1"></i>Invaild Email</li>
+              }
+              @else if (emailForm.get('email')?.getError('required')) {
+                <li class=""><i class="fa-solid fa-circle-exclamation mx-1"></i>Required</li>
+              }
+            </ul>
+          </div>
+        </div>
+            }
+            </div>
+            <div class="flex justify-center">
+              <button class="text-white btn flex justify-center items-center px-3 py-1">Send Code</button>
+            </div>
+            @if (emailNotFound === true) {
+              <p class="animeError text-red-800 dark:text-red-300 text-center pt-1">Email Not Found <i class="fa-solid font-black fa-xmark"></i></p>
+            }
+            @if (showErrorMessage === true) {
+              <p class="text-xs text-red-800 animeError dark:text-red-300 text-center pt-1">Must Login With The Same Account To Reset Password <i class="fa-solid font-black fa-xmark"></i></p>
+            }
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

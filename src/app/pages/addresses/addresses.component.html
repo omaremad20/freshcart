@@ -1,0 +1,51 @@
+@if (data) {
+  @if (!data.length) {
+    <section class="min-h-[100vh] flex justify-center items-center bg-slate-50 dark:bg-slate-950">
+      <div class="flex flex-col dark:text-white text-black">
+        <h1>No Addresses Added</h1>
+        <a routerLink="/uploadaddress" class="text-center font-black text-[#0AAD0A]" title="Tap To Add Address">Add Adress Now</a>
+      </div>
+    </section>
+  }@else {
+    <section class="bg-slate-50 dark:bg-slate-950 min-h-[100vh] pb-5 flex items-center justify-start flex-col">
+      <h1 class="text-center  text-3xl pb-3 pt-5 dark:text-white text-black font-black">My <span class="anmieWordLeft">Addresses</span></h1>
+        <div class=" w-[95%] my-3 mx-auto   bg-slate-200 dark:bg-slate-900 shadow-md rounded-md p-3">
+          <div class="row w-[95%] mx-auto">
+            @for (address of data; track address._id) {
+              <div class="col-12 ">
+                <div class="inner flex flex-col flex-lg-row justify-between">
+                  <div class="dark:text-white text-black">
+                    <p class="font-black  text-2xl">{{address.name}}</p>
+                    <ul class="ms-4 my-2">
+                      <li class="">
+                        <span class="font-semibold "> Details : </span>
+                        <span class="">{{address.details}}</span></li>
+                      <li> <span class="font-semibold"> City : </span>  {{address.city}}</li>
+                      <li> <span class="font-semibold"> Phone : </span> {{address.phone}}</li>
+                    </ul>
+                  </div>
+                  <div class="flex justify-center items-center">
+                    <button class="rounded-xl py-2  text-white px-3  shadow transition-all duration-300 ease-in-out bg-red-500" (click)="removeAddress(address._id)"> Delete Address </button>
+                  </div>
+                </div>
+                <div class="w-full h-[3px] rounded-sm my-3 bg-slate-300"></div>
+            </div>
+            }
+          </div>
+          <div class="row w-[95%] mx-auto ">
+            <div class="col-12">
+              <div class="inner flex items-center justify-between ">
+                <p class="font-black text-lg dark:text-white text-black">All Addresses Is : {{this.all}} </p>
+                <div class=" flex justify-center items-center dark:text-white text-black">
+                  <button class="bg-[#0AAD0A] text-white rounded-md p-2 shadow-md h-fit" routerLink="/uploadaddress">Add Address</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  }
+}
+@if (loading === true) {
+  <section class="min-h-[100vh] flex justify-center items-center bg-slate-50 dark:bg-slate-950"></section>
+}

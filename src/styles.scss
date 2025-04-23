@@ -1,0 +1,170 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap");
+
+:root {
+  --main-color: #0aad0a;
+  --light-color: #f0f3f2;
+  --shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px,
+    rgba(145, 158, 171, 0.14) 0px 4px 5px 0px,
+    rgba(145, 158, 171, 0.12) 0px 1px 10px 0px;
+  --font-family: "Encode Sans Expanded", sans-serif;
+  --rating-color: #ffc908;
+}
+
+body {
+  font-family: var(--font-family) !important;
+}
+
+.nav-link {
+  transition: unset !important;
+}
+.active-link {
+  background-color: var(--main-color) !important;
+  color: var(--light-color) !important;
+  border-radius: 5px;
+}
+
+.rating-color {
+  color: var(--rating-color);
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+a,
+a:hover {
+  text-decoration: none;
+}
+
+.product {
+  border-radius: 5px;
+  border: solid 1px var(--main-color);
+  transition: box-shadow 0.5s;
+  overflow: hidden;
+}
+
+.product:hover {
+  box-shadow: 0 0 10px #11bd1168;
+}
+
+.font-sm {
+  font-size: 12px;
+}
+.text-main {
+  color: var(--main-color);
+}
+.bg-main {
+  background-color: var(--main-color) !important;
+}
+.bg-main-light {
+  background-color: var(--light-color) !important;
+}
+.btn-main {
+  background-color: var(--main-color);
+  padding: 7px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+.btn-main:disabled {
+  cursor: not-allowed;
+  background-color: #ccc;
+}
+.btn-main:disabled:hover {
+  background-color: #ccc;
+}
+.btn-main:hover {
+  background-color: #11bd11;
+}
+.btn-main {
+  background-color: var(--main-color) !important;
+}
+.icon-color {
+  color: var(--rating-color) !important;
+}
+.iconSuccess {
+  color: #11bd11;
+}
+.messageClassToast {
+  color: #fff;
+}
+.toastClassBG {
+  color: white;
+  background-color: #0aad0a;
+  padding: 0.75rem;
+  margin-block: 0.25rem;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.toastClassBGError {
+  color: white;
+  background-color: rgb(218, 20, 20);
+  padding: 0.75rem;
+  margin-block: 0.25rem;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+//
+.animeError {
+  animation: slideErrorIn 0.5s ease-in-out forwards;
+}
+
+.animeError.hide {
+  animation: slideErrorOut 0.5s ease-in-out forwards;
+}
+
+@keyframes slideErrorIn {
+  from {
+    transform: translateY(-15px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideErrorOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-15px);
+    opacity: 0;
+  }
+}
+
+  //
+  .anmieWordLeft {
+    animation: anmieWordLeft 1s ease-in-out;
+  }
+  @keyframes anmieWordLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0rem);
+    }
+  }
+  .owl-theme .owl-nav .owl-prev ,   .owl-theme .owl-nav .owl-next {
+    all: unset !important;
+    background-color: #0aad0a !important;
+    color: white !important;
+    border-radius: 4px !important;
+    border: solid transparent 1px !important;
+    padding: 0.25rem !important;
+    margin-left: 0.5rem !important;
+    cursor: pointer !important;
+  }
+  .owl-theme .owl-nav [class*=owl-]:hover {
+    background-color: rgb(37, 152, 37) !important ;
+  }

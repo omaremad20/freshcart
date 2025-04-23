@@ -1,0 +1,42 @@
+@if (typeof specificProductDetails === 'object') {
+  <section class="bg-slate-50 dark:bg-slate-950">
+    <div class="w-[95%] mx-auto">
+    <div class="row flex flex-col flex-md-row min-h-[100vh] py-5 justify-center items-center">
+      <div class="col-12 col-md-4 col-lg-3">
+        <div class="inner inner-details">
+          <div class="parentImage">
+            <img [src]="specificProductDetails.imageCover" alt=""/>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-8 col-lg-9">
+        <div class="inner">
+          <div class="parentProductDetails text-black dark:text-white">
+            <p class="productTitle font-black my-2"> {{specificProductDetails.title}} </p>
+            <p class="productName my-2"> {{specificProductDetails.description}} </p>
+            @if (specificProductDetails.category) {
+              <p class="productCategory my-2">{{specificProductDetails.category.name}}</p>
+            }
+            <div class=" priceNdRate flex my-2 justify-between">
+              <p class="productPrice"> {{specificProductDetails.price}} EGP</p>
+              <div class="flex items center">
+                <p class="productRate"><i class="fa-solid fa-star icon-color"></i> {{specificProductDetails.ratingsAverage}} </p>
+              </div>
+            </div>
+          <div class=" row flex mx-auto justify-between ">
+                <button class="bg-[#0aad0ad4]  rounded-xl py-2  text-white px-3 hover:bg-[#0aad0a] shadow transition-all duration-300 ease-in-out dark:bg-[#0a8d0a] dark:hover:bg-[#0a9c0a] dark:text-white col-10 col-lg-11" (click)="addToCart()">+add to cart</button>
+              <button class="col-1  w-fit" [title]="wishlistIds.includes(productID) ? 'Tap To Remove' : 'Add To WishList' " (click)="wishlistIds.includes(productID) ? removeItemWishList(productID)  : addtoWishList(productID)">
+                <i class="fa-solid fa-heart text-2xl transition-colors duration-300"
+                  [class.text-red-500]="wishlistIds.includes(productID)"
+                  [class.dark:text-white]="!wishlistIds.includes(productID)">
+                </i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+}
+

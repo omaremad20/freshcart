@@ -1,0 +1,55 @@
+@if (productsData) {
+  @if (!productsData.length) {
+    <section class="my-0 flex justify-center min-h-[100vh] bg-slate-50 dark:bg-slate-950">
+      <div class="w-[90%] empty mx-auto ">
+        <h2 class="dark:text-white text-black">Your Wish List Is Empty For Now... </h2>
+        <a class="text-[#0AAD0A] font-black cursor-pointer my-2 " title="Products" routerLink="/Products">Add Items</a>
+      </div>
+    </section>
+  }@else{
+    <section class="py-5 min-h-[100vh] bg-slate-50 dark:bg-slate-950">
+      <div class="w-[90%]  p-2 mx-auto shadow-md rounded-lg bg-slate-200 dark:bg-slate-900">
+          <h1 class="text-3xl font-black mb-2 mt-3 dark:text-white text-black">Wish List </h1>
+        <div class="row p-3">
+          <div class="col-12 ">
+            @for (product of productsData; track product._id) {
+              <div class="row">
+                <div class="col-12 col-md-2 col-lg-1">
+                  <div class="parentImage">
+                    <img [src]="product.imageCover" [alt]="product.title" [title]="product.title" class="w-full block rounded-md" />
+                  </div>
+                </div>
+                <div class="col-12 col-lg-11 col-md-10 flex items-center">
+                  <div class="imageAndDetails my-1 flex">
+                    <div class="parentDetails flex flex-col justify-center text-black dark:text-white px-3">
+                      <p class="productTitle mb-1">Title : {{product.title}}</p>
+                      <p class="mb-1">Brand : <span>{{product.brand.slug}}</span> </p>
+                      <p class="mb-1">Store : <span>{{product.quantity}}</span> Peace</p>
+                      <p class="mb-1">Rate : <span>{{product.ratingsAverage}}</span><i class="fa-solid fa-star mx-1 rating-color"></i> </p>
+                      <p class="mb-1 green-text">Price : <span>{{product.price| currency:'GBP'}} EGP</span></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex col-12 align-items-center text-black dark:text-white justify-center">
+                  <button class="btn text-xs py-1" title="Click  To Remove" (click)="Removeproductfromwishlist(product._id)">
+                    <p class="remove mb-1 "> <i class="fa-solid green-text fa-trash-can"></i> Remove</p>
+                  </button>
+                    <span class="pipe  mx-2"></span>
+                  <button class="btn text-xs py-1" title="Click To Add To Cart" (click)="addToCart(product._id)">
+                    <p class="remove mb-1 ">  <i class="fa-solid fa-plus green-text"></i> Add To Cart </p>
+                  </button>
+                </div>
+                <div class="w-full h-[0.25px] my-4 dark:bg-slate-300 bg-slate-950"></div>
+              </div>
+            }
+            <p class="dark:text-white text-black">Sub Total Items : ({{wishListItems}}) </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  }
+}
+@if (loading === true) {
+  <section class="my-0 flex min-h-[100vh] bg-slate-50 dark:bg-slate-950"></section>
+
+}

@@ -1,0 +1,22 @@
+@if (categories) {
+  @if (!categories.length) {
+    <section class="min-h-[100vh] bg-slate-50 dark:bg-slate-950"></section>
+  }@else {
+    <section class="bg-slate-50 dark:bg-slate-950">
+      <div class="w-[90%] mx-auto py-5">
+      <div class="row">
+        @for (categorie of categories; track categorie._id) {
+          <div class="col-12 col-lg-4 col-xl-3 col-xxl-3 my-2 ">
+            <div class="inner p-1  cursor-pointer animate-slide-in-left  hover:shadow-md hover:ease-in-out dark:hover:shadow-lime-100 hover:shadow-lime-900 hover:duration-500">
+              <img [src]="categorie.image" [alt]="categorie.name" [title]="categorie.name" class="w-full round h-[400px]">
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+    </section>
+  }
+}
+@if(loading === true) {
+  <section class="min-h-[100vh] bg-slate-50 dark:bg-slate-950"></section>
+}

@@ -1,0 +1,23 @@
+@if (brands) {
+  @if(!brands.length){
+    <section class="min-h-[100vh] bg-slate-50 dark:bg-slate-950"></section>
+  }@else {
+    <section class="min-h-[100vh] bg-slate-50 dark:bg-slate-950">
+      <div class="w-[90%] mx-auto py-5">
+      <div class="row">
+        @for (brand of brands; track brand._id) {
+          <div class="col-6 col-lg-4 col-xl-3 col-xxl-3 my-2 ">
+            <div class="inner rounded-md cursor-pointer animate-slide-in-left hover:shadow-md hover:ease-in-out dark:hover:shadow-lime-100 hover:shadow-lime-900 hover:duration-500">
+              <img [src]="brand.image"  [alt]="brand.name" [title]="brand.name" class="w-[100%] block rounded-md">
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+    </section>
+  }
+}
+
+@if(loading === true) {
+  <section class="min-h-[100vh] bg-slate-50 dark:bg-slate-950"></section>
+}

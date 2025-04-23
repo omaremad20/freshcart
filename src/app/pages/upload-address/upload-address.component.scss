@@ -1,0 +1,14 @@
+input.shareLinkInput {
+  border: solid lightgreen 2px;
+  transition: ease-in-out box-shadow 0.3s;
+}
+input.shareLinkInput:focus {
+  box-shadow: 0px 0px 0px 2px lightgreen;
+}
+.registerTxt {
+  font-weight: 700;
+  font-size: 2rem;
+}
+ul {
+  list-style-type: none !important;
+}

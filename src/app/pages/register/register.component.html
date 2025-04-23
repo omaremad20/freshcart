@@ -1,0 +1,136 @@
+<section class="bg-slate-50 dark:bg-slate-950 flex items-center justify-center">
+  <div class="w-[90%] mx-auto bg-slate-100 dark:bg-slate-900 flex py-5 justify-center flex-col my-5 rounded-xl shadow">
+    <div class="w-[95%]  ms-auto">
+      <h2 class="registerTxt text-[#15f315] dark:text-[#0affff]">Register : </h2>
+    </div>
+    <form class="" [formGroup]="registerForm" (ngSubmit)="register()">
+      <div class=" mx-auto box-border flex flex-col py-[1rem] ">
+        <label for="name" class=" w-[85%] mx-auto mb-2 text-black dark:text-white">Name</label>
+        <input formControlName = "name" id="name" type="text" placeholder="Your Name..." class="w-[85%] rounded-xl mx-auto shareLinkInput bg-white dark:bg-black text-black dark:text-white" autocomplete="off"/>
+        @if (registerForm.get('name')?.errors && registerForm.get('name')?.touched) {
+          <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] mx-auto" role="alert">
+            <div>
+                <ul class="mt-1.5 list-disc  list-inside">
+                  @if (registerForm.get('name')?.getError('minlength')) {
+                    <li class="ico-tra"><i class="fa-solid fa-circle-exclamation mx-1  text-capitalize"></i>2 Char As Short</li>
+                  }@else if (registerForm.get('name')?.getError('maxlength')) {
+                    <li><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>16 Char As Long</li>
+                  }@else if (registerForm.get('name')?.getError('required')) {
+                    <li><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Required</li>
+                  }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+      <div class=" mx-auto box-border flex flex-col py-[1rem]">
+        <label for="email" class="w-[85%] mx-auto mb-2 text-black dark:text-white">Email</label>
+        <input formControlName = "email" id="email" type="email" placeholder="Your Email..." class="w-[85%] rounded-xl mx-auto shareLinkInput bg-white dark:bg-black text-black dark:text-white" autocomplete="off"/>
+        @if (registerForm.get('email')?.errors && registerForm.get('email')?.touched) {
+          <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] mx-auto" role="alert">
+            <div>
+                <ul class="mt-1.5 list-disc  list-inside">
+                  @if (registerForm.get('email')?.getError('email')) {
+                    <li class=""><i class="fa-solid fa-circle-exclamation text-capitalize mx-1"></i>Invaild Email</li>
+                  }@else if (registerForm.get('email')?.getError('required')) {
+                    <li><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Required</li>
+                  }@else if (registerForm.get('email')?.getError('minlength')) {
+                    <li><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Invaild Email</li>
+                  }@else if (registerForm.get('email')?.getError('maxlength')) {
+                    <li><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Invaild Email</li>
+                  }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+      <div class=" mx-auto box-border flex flex-col py-[1rem]">
+        <label for="password" class="w-[85%] mx-auto mb-2 text-black dark:text-white">Password</label>
+        <div class="flex justify-center items-center relative mx-auto w-[85%]">
+          <input formControlName = "password" id="password" [type]="passwordVisiable ? 'text' : 'password'" placeholder="Your Password..." class="w-full rounded-xl mx-auto shareLinkInput bg-white dark:bg-black text-black dark:text-white" autocomplete="off"/>
+          <div class="absolute right-3 cursor-pointer px-1" (click)="showPassword()" >
+            <i
+              class="fa-solid dark:text-white text-black"
+              [class.fa-eye]="passwordVisiable"
+              [class.fa-eye-slash]="!passwordVisiable"
+            ></i>
+          </div>
+        </div>
+        @if (registerForm.get('password')?.errors && registerForm.get('password')?.touched) {
+          <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] mx-auto" role="alert">
+            <div>
+                <ul class="mt-1.5 list-disc  list-inside">
+                  @if (registerForm.get('password')?.getError('pattern')) {
+                    <li class=""><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Must Contain Chars&Numbers</li>
+                  }@else if (registerForm.get('password')?.getError('minlength')) {
+                    <li><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>8 Char As Short</li>
+                  }@else if (registerForm.get('password')?.getError('maxlength')) {
+                    <li><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>32 Char As Long</li>
+                  }@else if (registerForm.get('password')?.getError('required')) {
+                    <li><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Required</li>
+                  }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class=" mx-auto box-border flex flex-col py-[1rem]">
+        <label for="rePassword" class="w-[85%] mx-auto mb-2 text-black dark:text-white">Re Enter Password</label>
+        <div class="flex justify-center items-center relative mx-auto w-[85%]">
+
+        <input formControlName = "rePassword" id="rePassword" [type]="passwordVisiable ? 'text' : 'password'" placeholder="Repeat Your Password..." class="w-full rounded-xl mx-auto shareLinkInput bg-white dark:bg-black text-black dark:text-white" autocomplete="off"/>
+        <div class="absolute right-3 cursor-pointer px-1" (click)="showPassword()" >
+          <i
+            class="fa-solid dark:text-white text-black"
+            [class.fa-eye]="passwordVisiable"
+            [class.fa-eye-slash]="!passwordVisiable"
+          ></i>
+        </div>
+        </div>
+          <div class="flex px-3  text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] mx-auto" role="alert">
+            <div>
+                <ul class="mt-1.5 list-disc  list-inside">
+                  @if (registerForm.get('rePassword')?.getError('required') && registerForm.get('rePassword')?.touched) {
+                    <li class="animeError"><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Required</li>
+                  }@else if (registerForm.errors && registerForm.get('rePassword')?.touched) {
+                    <li class="animeError"><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Password Not Match</li>
+                  }
+              </ul>
+            </div>
+          </div>
+      </div>
+      <div class=" mx-auto box-border flex flex-col py-[1rem]">
+        <label for="phone" class="w-[85%] mx-auto mb-2 text-black dark:text-white">Phone</label>
+        <input formControlName = "phone" id="phone" type="tel" placeholder="Your Phone..." class="w-[85%] rounded-xl mx-auto shareLinkInput bg-white dark:bg-black text-black dark:text-white" autocomplete="off"/>
+        @if (registerForm.get('phone')?.errors && registerForm.get('phone')?.touched) {
+          <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[85%] mx-auto" role="alert">
+            <div>
+                <ul class="mt-1.5 list-disc list-inside">
+                  @if (registerForm.get('phone')?.getError('pattern')) {
+                    <li class=""><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Invaild Egyptian Phone</li>
+                  }@else if (registerForm.get('phone')?.getError('required')) {
+                    <li><i class="fa-solid fa-circle-exclamation mx-1 text-capitalize"></i>Required</li>
+                  }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+      <div class="flex justify-center">
+        @if (isLoading === false) {
+            <button class=" mt-4 rounded-xl py-2 ms-2 bg-[#0aad0ad4]  text-white px-3 hover:bg-[#0aad0a] shadow transition-all duration-300 ease-in-out dark:bg-[#0a8d0a] dark:hover:bg-[#0a9c0a] dark:text-white">Register
+            <i class="fa-solid fa-right-to-bracket"></i>
+          </button>
+          }@else if (isLoading === true) {
+            <button class=" bg-[#0aad0ad4] mt-4 rounded-xl py-2 ms-2 text-white px-3 hover:bg-[#0aad0a] shadow transition-all duration-300 ease-in-out dark:bg-[#0a8d0a] dark:hover:bg-[#0a9c0a] dark:text-white" disabled>Register
+              <i class="fa-solid fa-circle-notch fa-spin"></i>
+            </button>
+          }
+      </div>
+    </form>
+    <div class="mt-2 text-center text-sm text-red-800 dark:text-red-300 rounded-lg">
+      <span class="font-medium"> {{emailExsitMsg}} </span>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,95 @@
+<!-- main-slider -->
+<section class="silder container bg-slate-50 dark:bg-slate-950 hidden md:block p-4 pt-5">
+  <div class="w-[90%] mx-auto">
+    <div class="row">
+      <div class="col-9 px-0">
+        <owl-carousel-o [options]="customOptions">
+          <ng-template carouselSlide>
+            <img src="./images/img1.avif" class="h-80" alt="Services" title="Services">
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="./images/img2.avif" class="h-80" alt="Adidas" title="Adidas">
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="./images/img3.avif" class="h-80" alt="Schneider" title="Schneider">
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="./images/img4.avif" class="h-80" alt="TelofillSale" title="TelofillSale">
+          </ng-template>
+        </owl-carousel-o>
+      </div>
+      <div class="col-3 px-0 ">
+        <img src="./images/slider-image-1.jpeg" class="h-40 w-full" alt="Vegatables" title="Vegatables">
+        <img src="./images/grocery-banner-2.jpeg" class="h-40" alt="grocery" title="grocery">
+      </div>
+    </div>
+  </div>
+</section>
+<!-- category-silder -->
+@if(categoriesData) {
+  @if (categoriesData.length) {
+    <section class="silder container bg-slate-50 dark:bg-slate-950 p-4 ">
+      <div class="w-[90%] mx-auto">
+        <owl-carousel-o [options]="CategorieSilderOptions">
+          @for (Categorie of categoriesData; track Categorie._id) {
+          <ng-template carouselSlide [id]="Categorie._id">
+            <img [src]="Categorie.image" [alt]="Categorie.slug" class="w-full h-[250px]" [title]="Categorie.name ">
+          </ng-template>
+          }
+        </owl-carousel-o>
+      </div>
+    </section>
+  }
+}
+<!-- products -->
+@if(productsData) {
+  @if (!productsData.length) {
+  <section class="homeSec bg-slate-50 dark:bg-slate-950 min-h-[100vh]"></section>
+  }@else {
+    <section class="homeSec bg-slate-50 dark:bg-slate-950 min-h-[100vh]">
+      <div class="w-[90%] mx-auto pt-3">
+        <input type="search" [(ngModel)] = 'searchKey'  placeholder="Search By Title..." class="w-full  rounded-xl shareLinkInput block mx-auto dark:bg-black text-black bg-white dark:text-white" autocomplete="off"/>
+      </div>
+      <div class="container w-[90%] mx-auto py-5">
+        <div class="row ">
+          @for (product of productsData | search : searchKey  ; track product._id) {
+          <div class="col-12 col-md-6 col-lg-4 col-xl-3 col-xxl-2 my-2 ">
+            <div class="inner hover:shadow-md hover:ease-in-out dark:hover:shadow-lime-100 hover:shadow-lime-900">
+              <div class=""  [routerLink]="['/Product-Details' , product._id]">
+                <div class="parentImage">
+                  <img [src]="product.imageCover" class="productImage" [alt]="product.title" [title]="product.title" />
+                </div>
+                <div class="Productdetails  p-2">
+                  <p class="productCategory text-[#0aad0a] dark:text-[#6eff7c]">
+                    {{ product.category.name }}
+                  </p>
+                  <p class="productName font-black dark:text-white text-black">{{product.title.split(" ").slice(0 , 2).join(" ")}}</p>
+                  <div class="priceNdRate flex justify-between">
+                    <p class="price dark:text-white text-black">{{product.price}} EGP</p>
+                    <div class=" flex items-center">
+                      <p class="text-xs rate mb-0 dark:text-white text-black"><i class="fa-solid fa-star rating-color"></i> {{product.ratingsAverage}} ({{product.ratingsQuantity}})</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class=" flex p-2 justify-between items-center ">
+                <button class="addTocartBtn block " (click)="addToCart(product._id)">Add To Cart
+                    <i class="ms-1 fa-solid fa-cart-shopping"></i>
+                  </button>
+                  <button [title]="wishlistIds.includes(product._id) ? 'Tap To Remove' : 'Add To WishList' " (click)="wishlistIds.includes(product._id) ? removeItemWishList(product._id)  : addtoWishList(product._id)">
+                    <i class="fa-solid fa-heart text-2xl transition-colors duration-300"
+                      [class.text-red-500]="wishlistIds.includes(product._id)"
+                      [class.dark:text-white]="!wishlistIds.includes(product._id)">
+                    </i>
+                  </button>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+}
+

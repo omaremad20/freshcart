@@ -1,0 +1,32 @@
+.main {
+  min-height: 90vh;
+}
+.anmieWord {
+  animation: slideLeftText 1s ease-in-out;
+  text-transform: capitalize !important;
+}
+@keyframes  slideLeftText{
+  from {
+    opacity: 0;
+    transform: translateX(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.dot {
+  right: 0;
+  top: -25%;
+  position: absolute;
+  color:white;
+  background-color: #0aad0a;
+  padding: 0;
+  margin: 0;
+  width: 30px;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  display: flex;
+  border-radius: 50% !important;
+}

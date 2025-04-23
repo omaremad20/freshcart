@@ -1,0 +1,61 @@
+<section class="bg-slate-50 dark:bg-slate-950 min-h-[100vh] justify-center flex items-center">
+  <div class="container flex  items-center main w-[95%] mx-auto justify-center">
+  <div class="row flex w-full">
+    <div class="col-12 col-lg-6">
+      <div class="inner pb-3">
+        <h1 class="text-6xl font-black mb-2 text-black dark:text-white">Fresh Cart</h1>
+        <h2 class="text-2xl mt-2 w-[95%] text-black dark:text-white">Fresh Cart Helps You To Reset Your Password.</h2>
+        <div class="py-1 text-black dark:text-white">
+          <p class="py-1">Steps</p>
+          <ul>
+            <li class="py-1 text-xs">1 - Type Your Email You Register with It Before.</li>
+            <li class="py-1 font-black text-xs">2 - Check Your Email && Verfiy Code.</li>
+            <li class="py-1 text-xs">3 - Type Your Email && New Password.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6">
+      <div class="inner bg-slate-200 dark:bg-slate-900 pt-3 rounded-md">
+        <h3 class="font-black text-xl ms-2 text-black dark:text-white mx-auto">Enter security code</h3>
+        <div class="w-full h-[3px] my-2 bg-slate-300"></div>
+        <form [formGroup]="codeForm" (ngSubmit)="verfiy()">
+          <div class=" mx-auto box-border flex flex-col py-[1rem]">
+            <label for="resetCode" class="w-[95%] text-black dark:text-white mx-auto mb-2">Please check your emails for a message with your code. Your code is 6 numbers long.</label>
+            <input formControlName = "resetCode" type="text" placeholder="Enter Code..." class="w-[95%] mb-2 rounded-xl mx-auto shareLinkInput text-black dark:text-white bg-white dark:bg-black">
+
+            @if (codeForm.get('resetCode')?.errors && codeForm.get('resetCode')?.touched) {
+              <div class="flex px-3 animeError text-sm text-red-800 dark:text-red-300 rounded-lg w-[95%] mx-auto" role="alert">
+                <div>
+                    <ul class=" list-disc  list-inside">
+              @if (codeForm.get('resetCode')?.getError('pattern') ) {
+                <li class=""><i class="fa-solid fa-circle-exclamation mx-1"></i>Invaild Code</li>
+              }
+              @else if (codeForm.get('resetCode')?.getError('required')) {
+                <li class=""><i class="fa-solid fa-circle-exclamation mx-1"></i>Required</li>
+              }
+              @else if (codeForm.get('resetCode')?.getError('maxlength')) {
+                <li class=""><i class="fa-solid fa-circle-exclamation mx-1"></i>6 Numbers As Long</li>
+              }@else if (codeForm.get('resetCode')?.getError('minlength')) {
+                <li class=""><i class="fa-solid fa-circle-exclamation mx-1"></i>5 Numbers As Short</li>
+              }
+                    </ul>
+                  </div>
+                </div>
+            }
+            </div>
+
+            <div class="flex justify-center">
+              <button class="text-white btn flex justify-center items-center px-3 py-1">Verfiy Code</button>
+            </div>
+            @if(vaildCode === false) {
+              <p class="text-center py-2 dark:text-red-300 text-red-800"><i class="fa-solid fa-circle-exclamation mx-1"></i>Wrong Code</p>
+            }
+            <p class="text-xs font-black py-2 w-[95%] mx-auto text-center text-black dark:text-white">**Please Don't Share This Code With Anyone**</p>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+</section>
