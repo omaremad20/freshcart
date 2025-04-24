@@ -44,6 +44,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   cancelAdd!: Subscription;
   cancelRemove!: Subscription;
   cancelWish!: Subscription;
+  productIdTarget!:string ;
   ngOnInit(): void {
     this.loading = true;
     this._NgxSpinnerService.show();
@@ -141,6 +142,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
             this._NgxSpinnerService.hide();
           }
         });
+      }
+    }
+  }
+  divCilcked(productId:string):void {
+    if(isPlatformBrowser(this._PLATFORM_ID)) {
+      if(sessionStorage.getItem('userToken')) {
+        sessionStorage.setItem('productIdTarget' , productId) ;
       }
     }
   }

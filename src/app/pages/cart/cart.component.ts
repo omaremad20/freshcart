@@ -1,5 +1,5 @@
-import { CurrencyPipe } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { CurrencyPipe, isPlatformBrowser } from '@angular/common';
+import { Component, inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -23,6 +23,7 @@ export class CartComponent implements OnInit, OnDestroy {
   private _NgxSpinnerService = inject(NgxSpinnerService);
   private _CheckoutAccessServiceService = inject(CheckoutAccessServiceService);
   private _Router = inject(Router);
+  private _PLATFORM_ID = inject(PLATFORM_ID) ;
   data!: Data;
   cartId!: string;
   cartOwner!: string;
@@ -45,7 +46,12 @@ export class CartComponent implements OnInit, OnDestroy {
         this.data = res.data;
         this.productsData = this.data.products;
         this.cartOwner = res.data.cartOwner;
-        this.cartId = res.cartId
+        this.cartId = res.cartId ;
+        if(isPlatformBrowser(this._PLATFORM_ID)) {
+          if(sessionStorage.getItem('userToken')) {
+            sessionStorage.setItem('cartId' , this.cartId) ;
+          }
+        }
         this.loading = false;
       },
       error: (err) => {
@@ -127,7 +133,7 @@ export class CartComponent implements OnInit, OnDestroy {
   }
   goToCheckOut(): void {
     this._CheckoutAccessServiceService.allowAccess();
-    this._Router.navigate(['/CheckOut', this.cartId, this.cartOwner])
+    this._Router.navigate(['/CheckOut'])
   }
   ngOnDestroy(): void {
     this.cancelLogged?.unsubscribe();

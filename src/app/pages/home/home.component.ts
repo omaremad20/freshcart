@@ -45,6 +45,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   cancelRemove!: Subscription;
   cancelLog!: Subscription;
   cancelWish!: Subscription;
+  productIdTarget!:string ;
   ngOnInit(): void {
     this._NgxSpinnerService.show();
     this.wishListItems();
@@ -146,7 +147,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     }
   }
-
+  divCilcked(productId:string):void {
+    if(isPlatformBrowser(this._PLATFORM_ID)) {
+      if(sessionStorage.getItem('userToken')) {
+        sessionStorage.setItem('productIdTarget' , productId) ;
+      }
+    }
+  }
   ngOnDestroy(): void {
     this.idObservableProducts?.unsubscribe();
     this.idObservableCategories?.unsubscribe();

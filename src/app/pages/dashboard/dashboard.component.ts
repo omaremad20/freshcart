@@ -86,6 +86,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         sessionStorage.removeItem('userName');
         sessionStorage.removeItem('userId');
         sessionStorage.removeItem('phone') ;
+        sessionStorage.removeItem('cartId') ;
         this._Router.navigate(['/Login']);
       }
     }

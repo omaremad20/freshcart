@@ -12,7 +12,7 @@
           @for (product of productsData | search : searchKey  ; track product._id) {
           <div class="col-12 col-md-6 col-lg-4 col-xl-3 col-xxl-2 my-2 ">
             <div class="inner hover:shadow-md hover:ease-in-out dark:hover:shadow-lime-100 hover:shadow-lime-900">
-              <div class=""  [routerLink]="['/Product-Details' , product._id]">
+              <div class=""  [routerLink]="['/Product-Details']" (click)="divCilcked(product._id)">
                 <div class="parentImage">
                   <img [src]="product.imageCover" class="productImage" [alt]="product.title" [title]="product.title" />
                 </div>

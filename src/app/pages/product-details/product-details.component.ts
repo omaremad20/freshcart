@@ -17,7 +17,6 @@ import { WishlistService } from '../../core/services/wishlist/wishlist.service';
 export class ProductDetailsComponent implements OnInit, OnDestroy {
   private _ProductsService = inject(ProductsService)
   private _CartService = inject(CartService)
-  private readonly _ActivatedRoute = inject(ActivatedRoute)
   private _ToastrService = inject(ToastrService);
   private _NgxSpinnerService = inject(NgxSpinnerService);
   private _WishlistService = inject(WishlistService);
@@ -39,23 +38,22 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     this._NgxSpinnerService.show();
     this.loading = true;
     this.wishListItems();
-    this._ActivatedRoute.paramMap.subscribe({
-      next: (_p_id) => {
-        this.productID = _p_id.get('p_id')!;
+    if (isPlatformBrowser(this._PLATFORM_ID)) {
+      if (sessionStorage.getItem('productIdTarget')) {
+        this.productID = sessionStorage.getItem('productIdTarget')!;
+        this._ProductsService.GetSpecificProduct(this.productID).subscribe({
+          next: (res) => {
+            this.loading = false
+            this.specificProductDetails = res.data;
+            this._NgxSpinnerService.hide();
+          },
+          error: (err) => {
+            this.loading = false;
+            this._NgxSpinnerService.hide();
+          }
+        })
       }
     }
-    )
-    this._ProductsService.GetSpecificProduct(this.productID).subscribe({
-      next: (res) => {
-        this.loading = false
-        this.specificProductDetails = res.data;
-        this._NgxSpinnerService.hide();
-      },
-      error: (err) => {
-        this.loading = false;
-        this._NgxSpinnerService.hide();
-      }
-    })
   }
   addToCart() {
     this._NgxSpinnerService.show();

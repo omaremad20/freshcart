@@ -48,6 +48,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     this._NgxSpinnerService.show();
     if (isPlatformBrowser(this._PLATFORM_ID)) {
       if (sessionStorage.getItem('userToken')) {
+        this.cartId = sessionStorage.getItem('cartId') ! ;
         this.cancelAddresses = this._AddressesService.Getloggeduseraddresses().subscribe({
           next: (res) => {
             this._NgxSpinnerService.hide();
@@ -59,16 +60,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
         })
       }
     }
-    this.cancelActive = this._ActivatedRoute.paramMap.subscribe({
-      next: (param) => {
-        this.cartId = param.get('cartId')!;
-      }
-    })
-    this.cancelActiveTwo = this._ActivatedRoute.paramMap.subscribe({
-      next: (param) => {
-        this.cartOwner = param.get('cartOwner')!;
-      }
-    })
+
   }
   checkOutForm: FormGroup = new FormGroup({
     details: new FormControl(this.detailsValue || null, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]),
