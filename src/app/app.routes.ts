@@ -1,4 +1,3 @@
-import { RenderMode } from '@angular/ssr';
 import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
@@ -36,7 +35,7 @@ export const routes: Routes = [
       { path: 'Dashboard', loadComponent: () => import('./pages/dashboard/dashboard.component').then((classes) => classes.DashboardComponent), title: 'DashBoard' , canActivate : [authGuard]},
       { path: 'Addresses', loadComponent: () => import('./pages/addresses/addresses.component').then((classes) => classes.AddressesComponent), title: 'Addresses' , canActivate : [authGuard]},
       { path: 'allorders', loadComponent: () => import('./pages/allorders/allorders.component').then((classes) => classes.AllordersComponent), title: 'Orders' , canActivate : [authGuard]},
-      { path: 'CheckOut/:cartId/:cartOwner', loadComponent: () => import('./pages/check-out/check-out.component').then((classes) => classes.CheckOutComponent), title: 'Check Out' , canActivate : [authGuard , checkoutGuardGuard] },
+      { path: 'CheckOut/:cartId/:cartOwner', loadComponent: () => import('./pages/check-out/check-out.component').then((classes) => classes.CheckOutComponent), title: 'Check Out' , canActivate : [authGuard , checkoutGuardGuard]},
       { path : 'Product-Details/:p_id' , loadComponent : () => import('./pages/product-details/product-details.component').then( (classes) => classes.ProductDetailsComponent ) , title : 'ProductDetails' , canActivate : [authGuard]} ,
       { path: '**', component: NotFoundComponent, title: 'Error Not Found 404' }
     ]
