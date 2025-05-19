@@ -42,6 +42,8 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cancelLogged = this._CartService.getLoggedUserCart().subscribe({
       next: (res) => {
         this._NgxSpinnerService.hide();
+        console.log(res.data);
+
         this.totalCartPice = res.data.totalCartPrice;
         this.data = res.data;
         this.productsData = this.data.products;

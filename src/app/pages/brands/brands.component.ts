@@ -20,6 +20,8 @@ export class BrandsComponent implements OnInit, OnDestroy {
     this._NgxSpinnerService.show();
     this.cancelBrands = this._BrandsService.GetAllBrands().subscribe({
       next: (res) => {
+        console.log(res);
+
         this.loading = false;
         this._NgxSpinnerService.hide();
         this.brands = res.data;

@@ -24,7 +24,7 @@
                         <div class="imageAndDetails flex">
                           <div class="parentDetails dark:text-white text-black flex flex-col justify-center px-3">
                             <p class="productTitle mb-1">Title : {{image.product.title}}</p>
-                            <p class="mb-1">Brand : <span>{{image.product.brand.slug}}</span> </p>
+                            <p class="mb-1">Brand : <span>{{image.product.brand?.slug || 'UNKNOWN'}}</span> </p>
                             <p class="mb-1 green-text">Price : <span>{{image.price}}</span></p>
                             <p class="mb-1">Peaces : <span>{{image.count}}</span></p>
                           </div>
